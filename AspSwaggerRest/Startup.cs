@@ -16,6 +16,7 @@ namespace AspSwaggerRest
 {
     public class Startup
     {
+        readonly string CorsConfiguration = "_corsConfiguration";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,6 +32,15 @@ namespace AspSwaggerRest
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AspSwaggerRest", Version = "v1" });
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: CorsConfiguration,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200"); //Puerto por defecto de Angular
+                    });
             });
         }
 
@@ -49,6 +59,8 @@ namespace AspSwaggerRest
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(CorsConfiguration);  //Añadimos esta configuracion para el frontend
 
             app.UseEndpoints(endpoints =>
             {
