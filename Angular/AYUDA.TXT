@@ -1,0 +1,6 @@
+https://www.npmjs.com/package/ng-openapi-gen
+
+You may want to install ng-openapi-gen globally or just on your project. Here is an example for a global setup:
+
+$ npm install -g ng-openapi-gen
+$ ng-openapi-gen --input swagger/swagger.json --output src/app/api  //Actualizar swagger
